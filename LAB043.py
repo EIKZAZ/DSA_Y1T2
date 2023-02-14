@@ -31,18 +31,4 @@ class ArrayStack:
     def printStack(self):
         print(self.data)
 
-def is_parentheses_matching(expression):
-    stack = ArrayStack()
-    for i in expression:
-        if i == "(":
-            stack.push(i)
-        elif i == ")":
-            stack.pop()
-    if stack.data != []:
-        print("Parentheses in " + expression +" are unmatched")
-    return stack.is_empty()
-
-myStack = ArrayStack()
-str = "(((A-B*C)"
-result = is_parentheses_matching(str)
-print(result)
+def infixToPostfix(expression)

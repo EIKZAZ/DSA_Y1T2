@@ -31,9 +31,17 @@ class ArrayStack:
     def printStack(self):
         print(self.data)
 
-    def copyStack(stack1, stack2):
-        for i in stack1:
-            
+def copyStack(stack1, stack2):
+    stack_check = ArrayStack()
+    while stack2.data != []:
+        stack2.pop()
+    while stack1.data != []:
+        x = stack1.pop()
+        stack_check.push(x)
+    while stack_check.data != []:
+        x = stack_check.pop()
+        stack1.push(x)
+        stack2.push(x)
 
 s1 = ArrayStack()
 s1.push(10); s1.push(20); s1.push(30)
