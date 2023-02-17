@@ -37,12 +37,18 @@ def is_parentheses_matching(expression):
         if i == "(":
             stack.push(i)
         elif i == ")":
-            stack.pop()
-    if stack.data != []:
+            if not stack.is_empty():
+                stack.pop()
+            else:
+                print("Parentheses in " + expression +" are unmatched")
+                return False
+    if stack.is_empty():
+        return True
+    else:
         print("Parentheses in " + expression +" are unmatched")
-    return stack.is_empty()
+        return False
 
 myStack = ArrayStack()
-str = "(((A-B*C)"
+str = "((())))))((A-B*C))))))))))))))"
 result = is_parentheses_matching(str)
 print(result)
