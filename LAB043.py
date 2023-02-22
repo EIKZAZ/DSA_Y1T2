@@ -26,32 +26,30 @@ class ArrayStack:
         if self.is_empty():
             return None
         else:
-            self.data[-1]
+            return self.data[-1]
 
     def printStack(self):
         print(self.data)
 
 def infixToPostfix(expression):
-    postfix = ""
     stack = ArrayStack()
+    postfix = ""
     for i in expression:
         if i.isalpha():
             postfix += i
-        elif i in "+-*/":
-            if stack.is_empty():
-                stack.push(i)
-            else:
-                if i in "+-":
-                    while not stack.is_empty():
+        else:
+            if not stack.is_empty():
+                if (i in ["+", "-"]) and (stack.stackTop() in ["*", "/", "+", "-"]):
+                    for _ in range(stack.size()):
                         postfix += stack.pop()
-                stack.push(i)
-                # if i in "*/":
-                #     if stack.stackTop() in "*/":
-                #       postfix += stack.pop()  
-    while not stack.is_empty():
-        postfix += stack.pop()
+                if (i in ["*", "/"]) and (stack.stackTop() in ["*", "/"]):
+                    postfix += stack.pop()
+            stack.push(i)
+    if not stack.is_empty():
+        for _ in range(stack.size()):
+            postfix += stack.pop()
     return postfix
 
 exp = "A+B*C/D-E+F*G"
-postfix2 = infixToPostfix(exp)
-print("Postfix of", exp, "is", postfix2)
+postfix = infixToPostfix(exp)
+print("Postfix of", exp, "is", postfix)
